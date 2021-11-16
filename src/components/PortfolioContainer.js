@@ -4,20 +4,22 @@ import Resume from './pages/Resume';
 import About from './pages/About';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
+import Footer from './Footer';
 
-export default function PortfolioContainer() {
+export default function PortfolioContainer({ projects, proficiencies }) {
   const [currentPage, setCurrentPage] = useState('About');
+  console.log(projects);
 
   // This method is checking to see what the value of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
   const renderPage = () => {
     if (currentPage === 'Resume') {
-      return <Resume />;
+      return <Resume proficiencies={proficiencies}/>;
     }
     if (currentPage === 'About') {
       return <About />;
     }
     if (currentPage === 'Portfolio') {
-      return <Portfolio />;
+      return <Portfolio projects={projects}/>;
     }
     return <Contact />;
   };
@@ -30,6 +32,7 @@ export default function PortfolioContainer() {
       <NavTabs currentPage={currentPage} handlePageChange={handlePageChange} />
       {/* Here we are calling the renderPage method which will return a component  */}
       {renderPage()}
+      <Footer />
     </div>
   );
 }
